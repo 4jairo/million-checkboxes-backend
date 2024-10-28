@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  backend:
+    build: .
+    ports: 
+      - "8900:8900"
+    links:
+      - redis-cache
+
+  redis-cache:
+    image: redis
+    ports: 
+      - "6379:6379"
