@@ -2,8 +2,7 @@ FROM rust:1.79 as builder
 
 WORKDIR /usr/src/million_checkboxes
 
-COPY Cargo.toml Cargo.lock ./
-COPY src ./src
+COPY . .
 
 RUN cargo build --release
 
