@@ -10,3 +10,7 @@ futures = "0.3.30"
 redis = { version = "0.26.1", features = ["tokio-comp"] }
 tokio = { version = "1.39.2", features = ["full"] }
 tower-http = { version = "0.5.2", features = ["compression-full", "cors"] }
+
+[[bin]]
+name = "migration_0001_from_1_bit_to_4_bits"
+path = "migrations/0001_from_1_bit_to_4_bits.rs"
