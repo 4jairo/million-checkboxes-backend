@@ -24,6 +24,7 @@ impl MessageType {
     pub fn from_str(txt: &str) -> Option<(usize, Self)> {
         let (i, value) = txt.split_once(";")?;       
 
+
         let i = i.parse::<usize>().ok()?;
         if i >= BITS_LEN {
             return None;

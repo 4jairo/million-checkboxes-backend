@@ -4,12 +4,20 @@ use tokio::net::TcpListener;
 use tower_http::compression::CompressionLayer;
 use tower_http::cors::CorsLayer;
 
+#[macro_use]
+mod dotenv;
 mod routes;
 mod db;
 
 
 #[tokio::main]
 async fn main() {
+    if cfg!(debug_assertions) {
+        dotenvy::from_filename(".env.development").unwrap();
+    } else {
+        dotenvy::from_filename(".env.production").unwrap();
+    }
+
     let compression_layer = CompressionLayer::new()
         .br(true)
         .deflate(true)

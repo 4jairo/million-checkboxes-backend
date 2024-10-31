@@ -13,15 +13,13 @@ pub struct Cache {
 pub const BITS_PER_CHECKBOX: usize = 4;
 pub const BITS_LEN: usize = 1_000_000 * BITS_PER_CHECKBOX;
 
-
-// const REDIS_URL: &str = "redis://redis-cache:6379"; // TODO: move to .env
-const REDIS_URL: &str = "redis://localhost:6379"; // TODO: move to .env
 const BITMAP_KEY: &str = "state";
 const BITMAP_UPDATE_CHANNEL: &str = "state_update";
 
 impl Cache {
     pub async fn new(tx: broadcast::Sender<String>) -> RedisResult<Self> {
-        let conn = redis::Client::open(REDIS_URL)?;
+        let redis_url = env_var!("REDIS_URL");
+        let conn = redis::Client::open(redis_url)?;
         let client = conn.get_multiplexed_tokio_connection().await?;
 
         let mut pubsub = conn.get_async_pubsub().await?;
@@ -48,7 +46,6 @@ impl Cache {
 
         Ok(())
     }
-
 
     pub async fn bitmap_modify(&mut self, i: isize, msg_type: MessageType, raw_msg: &String) -> RedisResult<()> {
         let byte = (i * 4) / 8;
