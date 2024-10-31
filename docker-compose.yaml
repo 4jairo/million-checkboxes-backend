@@ -1,13 +1,25 @@
-version: '3.9'
 services:
   backend:
+    #image: million_checkboxes_backend
     build: .
-    ports: 
-      - "8900:8900"
+    ports:
+      - "127.0.0.1:8900:8900"
     links:
       - redis-cache
+    depends_on:
+      - redis-cache
+    restart: unless-stopped
+    volumes:
+      - .env.production:/.env.production
 
   redis-cache:
     image: redis
-    ports: 
-      - "6379:6379"
+    command: ["redis-server", "--save", "3600", "1", "300", "100", "60", "10000"]
+    volumes:
+      - redis-data:/data
+    ports:
+      - "127.0.0.1:6379:6379"
+    restart: unless-stopped
+
+volumes:
+  redis-data:
