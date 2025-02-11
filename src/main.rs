@@ -28,7 +28,7 @@ async fn main() {
     let mut state = AppState::new().await;
     println!("redis cache connected");
 
-    state.cache.create_bitmap_if_null().await.unwrap();
+    state.cache.create_structure_if_null().await.unwrap();
 
     let routes = Router::new()
         .merge(routes::routes())

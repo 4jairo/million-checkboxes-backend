@@ -7,7 +7,7 @@ pub mod bits;
 
 #[derive(Clone)]
 pub struct AppState {
-    broadcast_rx: broadcast::Sender<String>,
+    broadcast_rx: broadcast::Sender<Vec<u8>>,
     pub cache: Cache,
 }
 
@@ -22,7 +22,7 @@ impl AppState {
         }
     }
 
-    pub fn broadcast_rx(&self) -> broadcast::Receiver<String> {
+    pub fn broadcast_rx(&self) -> broadcast::Receiver<Vec<u8>> {
         self.broadcast_rx.subscribe()
     }
 }
