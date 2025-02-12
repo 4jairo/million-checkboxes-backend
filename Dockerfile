@@ -1,4 +1,4 @@
-FROM rust:1.79 as builder
+FROM rust:1.79-slim as builder
 
 WORKDIR /usr/src/million_checkboxes
 
@@ -7,7 +7,7 @@ COPY src ./src
 
 RUN cargo build --release
 
-FROM ubuntu:22.04
+FROM debian:bookworm-slim
 
 COPY --from=builder /usr/src/million_checkboxes/target/release/million_checkboxes /usr/local/bin/million_checkboxes
 
