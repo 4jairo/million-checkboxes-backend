@@ -16,10 +16,7 @@ services:
     image: redis
     command: ["redis-server", "--save", "3600", "1", "300", "100", "60", "10000"]
     volumes:
-      - redis-data:/data
+      - ./redis-data:/data
     ports:
       - "127.0.0.1:6379:6379"
     restart: unless-stopped
-
-volumes:
-  redis-data:
