@@ -5,7 +5,7 @@ WORKDIR /usr/src/million_checkboxes
 COPY Cargo.toml Cargo.lock ./
 COPY src ./src
 
-RUN cargo build --release
+RUN cargo build --bin million_checkboxes --release
 
 FROM debian:bookworm-slim
 
