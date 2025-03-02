@@ -2,8 +2,6 @@
 
 Inspired by [OneMillionCheckboxes](https://en.wikipedia.org/wiki/One_Million_Checkboxes) but with colors
 
-You can play with it on <https://million-checkboxes.4jairo.tech>
-
 ![img](./millionCheckboxesImg.png)
 
 ## Frontend
